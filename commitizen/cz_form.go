@@ -50,6 +50,7 @@ func (cz ConventionalCommit)Questions() []model.Question {
 }
 
 func (cz ConventionalCommit)Message(answers map[string]string) string {
+	fmt.Println(answers)
 	prefix := answers["prefix"]
 	scope := answers["scope"]
 	subject := answers["subject"]
@@ -57,7 +58,7 @@ func (cz ConventionalCommit)Message(answers map[string]string) string {
 	footer := answers["footer"]
 	message := ""
 	if prefix != "" {
-		message := prefix
+		message += prefix
 		if scope != "" {
 			message += fmt.Sprintf("(%s)", scope)
 		}

@@ -2,11 +2,11 @@ package prompt
 
 import (
 	"fmt"
+	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
 	"go-commitizen/model"
 	"log"
 	"os"
-	"github.com/AlecAivazis/survey/v2"
 )
 
 func Ask(questions []model.Question) map[string]string {
@@ -37,7 +37,6 @@ func prompt(question model.Question) string {
 
 
 func promptList(question model.Question) string {
-
 	prompt := &survey.Select{
 		Message: question.Message,
 		VimMode: true,
@@ -57,8 +56,7 @@ func promptList(question model.Question) string {
 
 	}
 
-	return question.Options[answer.Index].Name
-
+	return question.Options[answer.Index].Value
 }
 
 func promptInput(question model.Question) (answer string) {
@@ -84,4 +82,3 @@ func promptConfirm(question model.Question) (answer string) {
 	survey.AskOne(prompt, &answer)
 	return
 }
-
