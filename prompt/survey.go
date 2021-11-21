@@ -43,7 +43,7 @@ func promptList(question model.Question) string {
 		PageSize: 8,
 	}
 	for _,option := range question.Options {
-		prompt.Options = append(prompt.Options, option.Name + ":" + option.Value)
+		prompt.Options = append(prompt.Options, option.Name)
 	}
 
 	var answer survey.OptionAnswer

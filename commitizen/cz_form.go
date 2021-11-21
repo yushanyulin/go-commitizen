@@ -24,6 +24,38 @@ func (cz ConventionalCommit)Questions() []model.Question {
 					"fix: A bug fix",
 					"fix",
 				},
+				{
+					"docs: Documentation only changes",
+					"docs",
+				},
+				{
+					"style: Changes that do not affect the meaning of the code",
+					"style",
+				},
+				{
+					"refactor: A code change that neither fixes a bug nor adds a feature",
+					"refactor",
+				},
+				{
+					"perf: A code change that improves performance",
+					"perf",
+				},
+				{
+					"test: Adding missing tests",
+					"test",
+				},
+				{
+					"chore: Changes to the build process or auxiliary tools",
+					"chore",
+				},
+				{
+					"revert: Revert to a commit",
+					"revert",
+				},
+				{
+					"WIP: Work in progress",
+					"WIP",
+				},
 			},
 		},
 		{
