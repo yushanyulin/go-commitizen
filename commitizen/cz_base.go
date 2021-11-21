@@ -19,6 +19,10 @@ type Commitizen interface {
 
 
 func Run(commitizen Commitizen) {
+	if isGitDir := checkGitDir(); !isGitDir {
+		fmt.Println("not a git directory")
+		return
+	}
 
 	if checkEmptyChange() {
 		fmt.Println("no changes added to commit(use 'git add')")
@@ -50,6 +54,11 @@ func Run(commitizen Commitizen) {
 func checkEmptyChange() bool {
 	isEmpty, _, _ := git.RunGit("git diff --quiet --cached")
 	return isEmpty
+}
+
+func checkGitDir() bool {
+	isGitDir, _, _ := git.RunGit("git remote")
+	return isGitDir
 }
 
 func commit(message string) {
