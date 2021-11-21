@@ -48,14 +48,7 @@ func promptList(question model.Question) string {
 
 	var answer survey.OptionAnswer
 	err := survey.AskOne(prompt, &answer)
-
-	if err != nil {
-		if err == terminal.InterruptErr {
-			log.Fatal("interrupted")
-		}
-
-	}
-
+	processError(err)
 	return question.Options[answer.Index].Value
 }
 
@@ -63,7 +56,8 @@ func promptInput(question model.Question) (answer string) {
 	prompt := &survey.Input{
 		Message: question.Message,
 	}
-	survey.AskOne(prompt, &answer)
+	err := survey.AskOne(prompt, &answer)
+	processError(err)
 	return
 }
 
@@ -71,7 +65,8 @@ func promptMultiline(question model.Question) (answer string) {
 	prompt := &survey.Multiline{
 		Message: question.Message,
 	}
-	survey.AskOne(prompt, &answer)
+	err := survey.AskOne(prompt, &answer)
+	processError(err)
 	return
 }
 
@@ -79,6 +74,20 @@ func promptConfirm(question model.Question) (answer string) {
 	prompt := &survey.Confirm{
 		Message: question.Message,
 	}
-	survey.AskOne(prompt, &answer)
+	err := survey.AskOne(prompt, &answer)
+	processError(err)
 	return
+}
+
+func processError(err error) {
+	if err == nil {
+		return
+	}
+
+	if err == terminal.InterruptErr {
+		os.Exit(1)
+		return
+	}
+
+	log.Fatal(err)
 }
