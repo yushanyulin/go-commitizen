@@ -27,7 +27,7 @@ func Run(commitizen Commitizen) {
 
 	answers := prompt.Ask(commitizen.Questions())
 	message := commitizen.Message(answers)
-	fmt.Printf("commit is :\n ###----------------------------------------------###\n%s\n" +
+	fmt.Printf("commit is :\n###----------------------------------------------###\n%s\n" +
 		"###----------------------------------------------###\n", message)
 
 	questions := []model.Question{

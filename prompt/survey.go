@@ -71,11 +71,19 @@ func promptMultiline(question model.Question) (answer string) {
 }
 
 func promptConfirm(question model.Question) (answer string) {
+	result := false
 	prompt := &survey.Confirm{
 		Message: question.Message,
+		Default: true,
 	}
-	err := survey.AskOne(prompt, &answer)
+	err := survey.AskOne(prompt, &result)
 	processError(err)
+	if result {
+		return "y"
+	} else {
+		return "n"
+	}
+
 	return
 }
 
