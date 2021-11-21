@@ -16,8 +16,7 @@ type Commitizen interface {
 	Schema() string
 }
 
-
-
+// Run a main func
 func Run(commitizen Commitizen) {
 	if isGitDir := checkGitDir(); !isGitDir {
 		fmt.Println("not a git directory")
@@ -31,13 +30,13 @@ func Run(commitizen Commitizen) {
 
 	answers := prompt.Ask(commitizen.Questions())
 	message := commitizen.Message(answers)
-	fmt.Printf("commit is :\n###----------------------------------------------###\n%s\n" +
+	fmt.Printf("commit is :\n###----------------------------------------------###\n%s\n"+
 		"###----------------------------------------------###\n", message)
 
 	questions := []model.Question{
 		{
-			Type: "confirm",
-			Name: "confirm",
+			Type:    "confirm",
+			Name:    "confirm",
 			Message: "Are you sure to proceed with the commit above:",
 		},
 	}
@@ -82,7 +81,7 @@ func commit(message string) {
 	ok, stdout, stderr := git.RunGit("git commit -F " + tmpfile.Name())
 	if ok {
 		fmt.Println(stdout)
-	} else  {
+	} else {
 		fmt.Println(stderr)
 	}
- }
+}

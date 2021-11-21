@@ -6,7 +6,8 @@ import (
 	"os/exec"
 )
 
-func RunGit(command string) (ok bool, stdout, stderr string){
+// RunGit can execute or run git command
+func RunGit(command string) (ok bool, stdout, stderr string) {
 	cmd := exec.Command("sh", "-c", command)
 
 	var outb, errb bytes.Buffer

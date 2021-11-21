@@ -2,13 +2,15 @@ package prompt
 
 import (
 	"fmt"
-	"github.com/AlecAivazis/survey/v2"
-	"github.com/AlecAivazis/survey/v2/terminal"
 	"go-commitizen/model"
 	"log"
 	"os"
+
+	"github.com/AlecAivazis/survey/v2"
+	"github.com/AlecAivazis/survey/v2/terminal"
 )
 
+// Ask shows the interactive command
 func Ask(questions []model.Question) map[string]string {
 	answers := make(map[string]string)
 	for _, question := range questions {
@@ -16,7 +18,6 @@ func Ask(questions []model.Question) map[string]string {
 	}
 	return answers
 }
-
 
 func prompt(question model.Question) string {
 	switch question.Type {
@@ -35,14 +36,13 @@ func prompt(question model.Question) string {
 	return ""
 }
 
-
 func promptList(question model.Question) string {
 	prompt := &survey.Select{
-		Message: question.Message,
-		VimMode: true,
+		Message:  question.Message,
+		VimMode:  true,
 		PageSize: 8,
 	}
-	for _,option := range question.Options {
+	for _, option := range question.Options {
 		prompt.Options = append(prompt.Options, option.Name)
 	}
 
@@ -80,11 +80,8 @@ func promptConfirm(question model.Question) (answer string) {
 	processError(err)
 	if result {
 		return "y"
-	} else {
-		return "n"
 	}
-
-	return
+	return "n"
 }
 
 func processError(err error) {

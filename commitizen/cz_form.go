@@ -5,15 +5,16 @@ import (
 	"go-commitizen/model"
 )
 
+// ConventionalCommit implement Commitizen
 type ConventionalCommit struct {
-
 }
 
-func (cz ConventionalCommit)Questions() []model.Question {
+// Questions standard commitizen questions
+func (cz ConventionalCommit) Questions() []model.Question {
 	return []model.Question{
 		{
-			Type: "list",
-			Name: "prefix",
+			Type:    "list",
+			Name:    "prefix",
 			Message: "Select the type of change you are committing",
 			Options: []model.Option{
 				{
@@ -59,29 +60,30 @@ func (cz ConventionalCommit)Questions() []model.Question {
 			},
 		},
 		{
-			Type: "input",
-			Name: "scope",
+			Type:    "input",
+			Name:    "scope",
 			Message: "Scope. Specifying place of the commit change(users, db, poll):",
 		},
 		{
-			Type: "input",
-			Name: "subject",
+			Type:    "input",
+			Name:    "subject",
 			Message: "Subject. Write a SHORT, IMPERATIVE tense description of the change:",
 		},
 		{
-			Type: "multiline",
-			Name: "body",
+			Type:    "multiline",
+			Name:    "body",
 			Message: "Body. Provide a LONGER description of the change(optional):",
 		},
 		{
-			Type: "input",
-			Name: "footer",
+			Type:    "input",
+			Name:    "footer",
 			Message: "Footer. List any Breaking Changes or reference issues that this commit closes:",
 		},
 	}
 }
 
-func (cz ConventionalCommit)Message(answers map[string]string) string {
+// Message  generate message to git commit
+func (cz ConventionalCommit) Message(answers map[string]string) string {
 	fmt.Println(answers)
 	prefix := answers["prefix"]
 	scope := answers["scope"]
@@ -101,15 +103,16 @@ func (cz ConventionalCommit)Message(answers map[string]string) string {
 		message += "\n\n" + body
 	}
 	if footer != "" {
-		 message += "\n\n" + footer
+		message += "\n\n" + footer
 	}
 	return message
 }
 
-func (cz ConventionalCommit)Schema() string {
+// Schema no use in fact
+func (cz ConventionalCommit) Schema() string {
 	return "<type>(<scope>): <subject>\n" +
-		   "<BLANK LINE>\n" +
-		   "<body>\n" +
-		   "<BLANK LINE>\n" +
-		   "<footer>"
+		"<BLANK LINE>\n" +
+		"<body>\n" +
+		"<BLANK LINE>\n" +
+		"<footer>"
 }
